@@ -1,5 +1,7 @@
 module Arrays where
 
+import Prelude hiding ((>>=), return)
+
 -- data Arr
 -- data Val
 -- data Ix
@@ -43,16 +45,16 @@ elab (Prog c t) =  eval t (exec c (newarray 0))
 -- indicating explicitly that an array be single threaded with monads
 type M a = State -> (a, State)
 
-return    :: a -> M a  -- unit eq of return
+return  :: a -> M a  -- unit eq of return
 return  a = \x -> (a, x)
 
-(>>=)   :: M a -> (a -> M b) -> M b
+(>>=)  :: M a -> (a -> M b) -> M b
 m >>= k = \x -> let (a, y) = m x in
                  let (b, z) = k a y in
                    (b,z)
 
 block :: Val -> M a -> a
-block v m = let (a, x) = m (newarray v) in a 
+block v m = let (a, x) = m (newarray v) in a
 
 fetch :: Ix -> M Val
 fetch i = \x -> (index i x, x)
@@ -60,4 +62,17 @@ fetch i = \x -> (index i x, x)
 assign :: Ix -> Val -> M ()
 assign i v = \x -> ((), update i v x)
 
+-- Rewrite to a monadic interpreter 
+eval' :: Term -> M Int
+eval' (Var i) = fetch i
+eval' (Con a) = return a
+eval' (Add t u) = eval' t >>= \a -> eval' u >>= \b -> return (a + b)
+
+exec' :: Comm -> M ()
+exec' (Asgn i t) = (eval' t) >>= \a -> assign i a
+exec' (Seq c d) = exec' c >>= \() -> exec' d >>= \() -> return ()
+exec' (If t c d) = eval' t >>= \a -> if a == 0 then exec' c else exec' d
+
+elab' :: Prog -> Int
+elab' (Prog c t) = block 0 (exec' c >>= \() -> eval' t >>= \a -> return a)
 
