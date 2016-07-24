@@ -7,7 +7,7 @@ main main5,6
 ./Setup.hs,15
 main main1,2
 
-./src/Arrays.hs,1048
+./src/Arrays.hs,1347
 module Arrays Arrays0,1
 import import2,3
 newarray newarray8,9
@@ -56,6 +56,84 @@ exec' exec'70,71
 exec' exec'71,72
 elab' elab'75,76
 elab' elab'76,77
+type M' M'79,80
+return' return'81,82
+return' return'82,83
+(>>>=>>>=84,85
+fetch' fetch'87,88
+fetch' fetch'88,89
+coerce coerce93,94
+coerce coerce94,95
+eval'' eval''97,98
+eval'' eval''98,99
+exec'' exec''102,103
+exec'' exec''103,104
+elab'' elab''107,108
+elab'' elab''108,109
+
+./src/flycheck_Arrays.hs,1347
+module Arrays Arrays0,1
+import import2,3
+newarray newarray8,9
+newarray newarray9,10
+index index11,12
+index index12,13
+update update14,15
+update update15,16
+data IdId19,20
+data Term Term20,21
+data Term = Var Var20,21
+data Term = Var Id | Con Con20,21
+data Term = Var Id | Con Int | Add Add20,21
+data Comm Comm21,22
+data Comm = Asgn Asgn21,22
+data Comm = Asgn Id Term | Seq Seq21,22
+data Comm = Asgn Id Term | Seq Comm Comm | If If21,22
+data Prog Prog22,23
+data Prog = Prog Prog22,23
+data ArrArr25,26
+type State State26,27
+type Ix Ix27,28
+type Val Val28,29
+eval eval31,32
+eval eval32,33
+exec exec36,37
+exec exec37,38
+elab elab41,42
+elab elab42,43
+type M M45,46
+type M a a45,46
+return return47,48
+return return48,49
+(>(50,51
+(>>=>>=50,51
+m m51,52
+block block55,56
+block block56,57
+fetch fetch58,59
+fetch fetch59,60
+assign assign61,62
+assign assign62,63
+eval' eval'65,66
+eval' eval'66,67
+exec' exec'70,71
+exec' exec'71,72
+elab' elab'75,76
+elab' elab'76,77
+type M' M'79,80
+return' return'81,82
+return' return'82,83
+(>>>=>>>=84,85
+fetch' fetch'87,88
+fetch' fetch'88,89
+coerce coerce93,94
+coerce coerce94,95
+eval'' eval''97,98
+eval'' eval''98,99
+exec'' exec''102,103
+exec'' exec''103,104
+elab'' elab''107,108
+elab'' elab''108,109
 
 ./src/Lib.hs,65
 module LibLib0,1
